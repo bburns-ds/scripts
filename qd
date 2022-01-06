@@ -1,0 +1,26 @@
+#!/bin/bash
+
+files=(~/Documents/docs/*)
+
+echo "Quick Document Library:"
+for((i=1; i<=${#files[@]}; i++))
+do
+	temp="${files[i-1]:29}"
+	echo "  [${i}] ${temp:0:${#temp}-4}"
+done
+echo "Which document would you like to open? [#]"
+
+read filenum
+file="${path}${files[$filenum-1]}"
+
+echo "Would you like to edit? [y/n]"
+
+read edit
+
+if [ $edit == "y" ]
+then 
+	vim $file
+else 
+	clear
+	cat $file
+fi

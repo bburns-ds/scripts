@@ -1,0 +1,11 @@
+#!/bin/bash
+
+path=~/Documents/docs/todo.txt
+
+clear
+if [ $# -ge 1 ]
+then
+	vim $path
+fi
+
+cat $path
