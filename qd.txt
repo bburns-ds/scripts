@@ -1,5 +1,0 @@
-Quick Document Library:
-	[1] shopping
-	[2] courses
-	[3] interests
-Which document would you like to open? [#]
