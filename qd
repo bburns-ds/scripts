@@ -1,12 +1,15 @@
 #!/bin/bash
 
+lshift=34
+rshift=4
+
 center() {
   termwidth="$(tput cols)"
   padding="$(printf '%0.1s' ={1..500})"
   printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
 }
 
-files=(~/Documents/docs/*)
+files=(~/Documents/quickdocs/*)
 
 if [ $# -ge 1 ]
 then
@@ -18,32 +21,16 @@ then
 		fi
 	else
 		clear 
-		temp="${files[${1}-1]:29}"
-		center "${temp:0:${#temp}-4}"
+		temp="${files[${1}-1]:$lshift}"
+		center "${temp:0:${#temp}-$rshift}"
 		cat ${files[${1}-1]}
 	fi
 	exit
 else
-	echo "Quick Document Library:"
+	echo "Quick Document Files:"
 	for((i=1; i<=${#files[@]}; i++))
 	do
-		temp="${files[i-1]:29}"
-		echo "  [${i}] ${temp:0:${#temp}-4}"
+		temp="${files[i-1]:$lshift}"
+		echo "  [${i}] ${temp:0:${#temp}-$rshift}"
 	done
-	echo "Which document would you like to open? [#]"
-
-	read filenum
-	file="${files[$filenum-1]}"
-
-	echo "Would you like to edit? [y/n]"
-
-	read edit
-
-	if [ $edit == "y" ]
-	then 
-		vim $file
-	else 
-		clear
-		cat $file
-	fi
 fi
