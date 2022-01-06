@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path=~/Documents/docs/todo.txt
+path=~/Documents/quickdocs/todo.txt
 
 clear
 if [ $# -ge 1 ]
