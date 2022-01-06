@@ -1,26 +1,49 @@
 #!/bin/bash
 
+center() {
+  termwidth="$(tput cols)"
+  padding="$(printf '%0.1s' ={1..500})"
+  printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
+}
+
 files=(~/Documents/docs/*)
 
-echo "Quick Document Library:"
-for((i=1; i<=${#files[@]}; i++))
-do
-	temp="${files[i-1]:29}"
-	echo "  [${i}] ${temp:0:${#temp}-4}"
-done
-echo "Which document would you like to open? [#]"
+if [ $# -ge 1 ]
+then
+	if [ $# -ge 2 ]
+	then 
+		if [ $2 == "-e" ]
+		then 
+			vim ${files[${1}-1]}
+		fi
+	else
+		clear 
+		temp="${files[${1}-1]:29}"
+		center "${temp:0:${#temp}-4}"
+		cat ${files[${1}-1]}
+	fi
+	exit
+else
+	echo "Quick Document Library:"
+	for((i=1; i<=${#files[@]}; i++))
+	do
+		temp="${files[i-1]:29}"
+		echo "  [${i}] ${temp:0:${#temp}-4}"
+	done
+	echo "Which document would you like to open? [#]"
 
-read filenum
-file="${path}${files[$filenum-1]}"
+	read filenum
+	file="${files[$filenum-1]}"
 
-echo "Would you like to edit? [y/n]"
+	echo "Would you like to edit? [y/n]"
 
-read edit
+	read edit
 
-if [ $edit == "y" ]
-then 
-	vim $file
-else 
-	clear
-	cat $file
+	if [ $edit == "y" ]
+	then 
+		vim $file
+	else 
+		clear
+		cat $file
+	fi
 fi
