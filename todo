@@ -5,7 +5,14 @@ path=~/Documents/quickdocs/todo.txt
 clear
 if [ $# -ge 1 ]
 then
-	vim $path
+	if [ $1 == "-f" ]
+	then 
+		cat $path
+	else
+		nvim $path
+		sed -n '/-------------- Queue ---------------/!p;//q' $path
+	fi
+else
+	sed -n '/-------------- Queue ---------------/!p;//q' $path
 fi
 
-cat $path

@@ -3,11 +3,11 @@
 lshift=34
 rshift=4
 
-center() {
-  termwidth="$(tput cols)"
-  padding="$(printf '%0.1s' ={1..500})"
-  printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
-}
+#center() {
+#  termwidth="$(tput cols)"
+#  padding="$(printf '%0.1s' ' '{1..500})"
+#  printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
+#}
 
 files=(~/Documents/quickdocs/*)
 
@@ -20,9 +20,8 @@ then
 			vim ${files[${1}-1]}
 		fi
 	else
-		clear 
-		temp="${files[${1}-1]:$lshift}"
-		center "${temp:0:${#temp}-$rshift}"
+#		temp="${files[${1}-1]:$lshift}"
+#		center "${temp:0:${#temp}-$rshift}"
 		cat ${files[${1}-1]}
 	fi
 	exit

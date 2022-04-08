@@ -1,0 +1,3 @@
+#!/bin/bash
+clear
+cat ~/Documents/quickdocs/reminders.txt
